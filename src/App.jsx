@@ -52,6 +52,15 @@ const App = () => {
     setShowPopup(false); // Hide popup after starting session
   };
 
+  const endSession = () => {
+    if (session) {
+      session.leaveCall();
+      setSession(null);
+      setStatus("Idle"); // Reset status
+      console.log("Call ended");
+    }
+  };
+
   return (
     <div className="w-screen h-screen bg-[#201c1c] flex justify-center items-center flex-col gap-8">
       <div className="flex justify-center items-center gap-8 h-[400px]">
@@ -90,6 +99,7 @@ const App = () => {
       </div>
       <div className="h-12">
         {session && (
+          <>
           <div className="flex flex-col items-center">
             <p className="text-white font-semibold">{status}</p>
             {/* Listening Animation */}
@@ -106,6 +116,13 @@ const App = () => {
               </div>
              )} 
           </div>
+
+          <div className="flex items-center justify-center mt-6 bg-[#ffffff] text-[#3d3d3c] p-2 rounded-xl w-[100px]"
+            onClick={endSession}
+          >
+            end call
+          </div>
+             </>
         )}
       </div>
 
