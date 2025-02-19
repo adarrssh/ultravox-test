@@ -117,7 +117,7 @@ const App = () => {
              )} 
           </div>
 
-          <div className="flex items-center justify-center mt-6 bg-[#ffffff] text-[#3d3d3c] p-2 rounded-xl w-[100px]"
+          <div className="flex items-center justify-center mt-6 bg-[#ffffff] text-[#3d3d3c] p-2 rounded-xl w-[100px] cursor-pointer"
             onClick={endSession}
           >
             end call
