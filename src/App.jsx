@@ -4,6 +4,7 @@ import girl2 from "./assets/girl2.svg";
 import boy1 from "./assets/boy1.svg";
 import axios from "axios";
 import { UltravoxSession } from "ultravox-client";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const App = () => {
   const [session, setSession] = useState(null);
@@ -31,6 +32,7 @@ const App = () => {
   const startSession = () => {
     console.log({ joinCallUrl });
     if (!joinCallUrl) return;
+    setStatus("Idle");
 
     const newSession = new UltravoxSession();
     newSession.joinCall(joinCallUrl);
@@ -97,40 +99,63 @@ const App = () => {
           </button>
         </div>
       </div>
-      <div className="h-12">
+      <div className="h-[120px] w-auto">
         {session && (
           <>
-          <div className="flex flex-col items-center">
-            <p className="text-white font-semibold">{status}</p>
-            {/* Listening Animation */}
-            {status === "listening" && (
-              <div className="w-6 h-6 bg-green-400 rounded-full animate-pulse"></div>
-            )}
+            <div className="flex flex-col items-center">
+              <p className="text-white font-semibold">
+                {`${status}`.toLocaleUpperCase()}
+              </p>
+              {/* Listening Animation */}
+              {status === "listening" && (
+                <div className="h-[120px]">
+                  <DotLottieReact
+                    src="https://lottie.host/d303fead-6e07-40d7-81d0-6165aa4a0a9b/7CKzwaJXLZ.lottie"
+                    loop
+                    autoplay
+                  />
+                </div>
+              )}
 
-            {/* Speaking Animation */}
-            {status === "speaking" && (
-              <div className="flex space-x-1 mt-2">
-                <div className="w-2 h-6 bg-cyan-300 animate-bounce"></div>
-                <div className="w-2 h-4 bg-cyan-300 animate-bounce delay-100"></div>
-                <div className="w-2 h-6 bg-cyan-300 animate-bounce delay-200"></div>
-              </div>
-             )} 
-          </div>
+              {/* Speaking Animation */}
+              {status === "speaking" && (
+                <div className="w-[150px] h-[100px]">
+                  <DotLottieReact
+                    src="https://lottie.host/5e35d3ad-ed2c-4984-a6b0-30f859f3f83e/iCy3VVKsTO.lottie"
+                    loop
+                    autoplay
+                  />
+                </div>
+              )}
 
-          <div className="flex items-center justify-center mt-6 bg-[#ffffff] text-[#3d3d3c] p-2 rounded-xl w-[100px] cursor-pointer"
-            onClick={endSession}
-          >
-            end call
-          </div>
-             </>
+              {status === "thinking" && (
+                <div className="w-[100px] h-[50px]">
+                  <DotLottieReact
+                    src="https://lottie.host/dae28e11-1af2-475b-a5dd-69d53d80c8a1/wjbugXnePI.lottie"
+                    loop
+                    autoplay
+                  />
+                </div>
+              )}
+            </div>
+          </>
         )}
       </div>
 
+      {session && status !== "disconnected" && (
+        <div
+          className="flex items-center justify-center bg-[#ffffff] text-[#3d3d3c] p-2 rounded-xl w-[100px] cursor-pointer"
+          onClick={endSession}
+        >
+          end call
+        </div>
+      )}
+
       {/* Popup: Ready for Session */}
       {showPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-            <h2 className="text-lg font-bold mb-4">Ready for session?</h2>
+        <div className=" z-50 fixed inset-0  flex justify-center items-center">
+          <div className="bg-black bg-opacity-45 p-6 rounded-lg shadow-lg text-center">
+            <h2 className="text-lg text-white font-bold mb-4">Ready for session?</h2>
             <button
               onClick={startSession}
               className="bg-blue-500 text-white px-4 py-2 rounded-lg mr-4"
@@ -146,10 +171,49 @@ const App = () => {
           </div>
         </div>
       )}
-
-      {/* AI Status & Animations */}
     </div>
   );
 };
 
 export default App;
+
+// import React from 'react';
+// import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
+// const App = () => {
+//   return (
+//     <DotLottieReact
+//       src="https://lottie.host/5e35d3ad-ed2c-4984-a6b0-30f859f3f83e/iCy3VVKsTO.lottie"
+//       loop
+//       autoplay
+//     />
+//   );
+// };
+
+// l
+
+// import React from 'react';
+// import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
+// const App = () => {
+//   return (
+//     <DotLottieReact
+//       src="https://lottie.host/d303fead-6e07-40d7-81d0-6165aa4a0a9b/7CKzwaJXLZ.lottie"
+//       loop
+//       autoplay
+//     />
+//   );
+// };
+
+// import React from 'react';
+// import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
+// const App = () => {
+//   return (
+//     <DotLottieReact
+//       src="https://lottie.host/dae28e11-1af2-475b-a5dd-69d53d80c8a1/wjbugXnePI.lottie"
+//       loop
+//       autoplay
+//     />
+//   );
+// };
