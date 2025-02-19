@@ -63,6 +63,10 @@ const App = () => {
     }
   };
 
+  const capitalizeFirstLetter = (str) => {
+    return str?.charAt(0).toUpperCase() + str?.slice(1);
+  };
+
   return (
     <div className="w-screen h-screen bg-[#201c1c] flex justify-center items-center flex-col gap-8">
       <div className="flex justify-center items-center gap-8 h-[400px]">
@@ -104,7 +108,7 @@ const App = () => {
           <>
             <div className="flex flex-col items-center">
               <p className="text-white font-semibold">
-                {`${status}`.toLocaleUpperCase()}
+                {`${capitalizeFirstLetter(status)}`}
               </p>
               {/* Listening Animation */}
               {status === "listening" && (
